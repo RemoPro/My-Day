@@ -11,14 +11,14 @@ import SwiftData
 
 struct ContentView: View {
     
-    // Datenbank per Variabel ansprechbar machen
+    // Database through variable…
     @Environment(\.modelContext) private var modelContext
     
-    // Datenbank durchsuchen und das anzeigen der Werte ermöglichen
-    @Query private var items: [Item]
+    // search through the database for the values
+    @Query private var event: [Event]
+    //🔴 @Query(sort: \Event.startTime) // sort after time beginning
     
-    // Damit das Sheet für neue hinzufügen gezeigt werden kann
-    ///@State private var showSheet = false
+    // showing the "add new" sheet
     @State private var showSheet: Bool = false
     
     @State private var title: String = ""
@@ -28,33 +28,28 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView{
             
-            // Wenn die Datenbank leer ist es zeigen
-            if items.isEmpty {
-                ContentUnavailableView("Keine Einträge vorhanden…", systemImage: "cirle.slash")
+            // If nothing is saved show it
+            if event.isEmpty {
+                ContentUnavailableView("Keine Einträge vorhanden…", systemImage: "circle.slash")
             }
             
-            // Liste der Einträge
             List{
                 
-                // Mit jedem Eintrag wiederholen
-                ForEach(items) { item in
-                    NavigationLink {
-                        // Öffnet es als neue View
-                        Text("Fach \(item.title)")
-                    } label: {
-                        // Was zu sehen ist
-                        VStack{
-                            Text(item.title)
-                                .bold()
-                            HStack{
-                                // Die Zeiten sind nicht Text, darum maskieren in einem String
-                                Text("\(item.startTime)") +
-                                Text("+") +
-                                Text("\(item.endTime)")
-                            }
+                // repeat with each entry
+                ForEach(event) { event in
+                    
+                    VStack(alignment: .leading) {
+                        Text(event.title)
+                            .bold()
+                        HStack{
+                            // Time isn't a string and has to be maked
+                            Text(event.startTime.formatted(date: .omitted, time: .shortened))
+                            Text("–")
+                            Text(event.endTime.formatted(date: .omitted, time: .shortened))
                         }
-                        
-                    } // label List Ende
+                    }
+                    
+                    
                 }
                 .onDelete(perform: deleteItems) // Löscchen ermöglichen
                 
@@ -87,17 +82,17 @@ struct ContentView: View {
             Text("Select an item")
         } // NavigationSplitView
     } // View
-   
+    
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(event[index])
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }

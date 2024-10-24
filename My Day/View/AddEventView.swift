@@ -10,64 +10,59 @@ import SwiftData
 
 struct AddEventView: View {
     @Environment(\.modelContext) var modelContext
-    @Binding var showSheet = Bool
+    @Binding var showSheet: Bool
     
     @State private var title: String = ""
     @State private var startTime = Date()
     @State private var endTime = Date()
+    // 🔴 @State private var eventColor: Color = Color
     
     var body: some View {
-        // Felder für hinzufügen
-        List {
-            Text("Neues Event")
-            
-            TextField("Titel", text: $title)
-            
-            DatePicker("Start",
-                       selection: $startTime,
-                       displayedComponents: .hourAndMinute
-            )
-            .datePickerStyle(.compact)
-            
-            DatePicker("Ende",
-                       selection: $endTime,
-                       displayedComponents: .hourAndMinute
-            )
-            .datePickerStyle(.compact)
-            
-            Button{
-                // Neues Objekt erstellen
-                let newItem = Item(title: title, startTime: startTime, endTime: endTime)
-                //let newItem = Event(event: title, startTime: startDate.formatted(.time), endTime: endTime.formatted(.time))
+        // For adding a new event
+        NavigationSplitView{
+            List {
+                Section{
+                    TextField("Titel", text: $title)
+                    
+                    Group{
+                        DatePicker("Start",
+                                   selection: $startTime,
+                                   displayedComponents: .hourAndMinute)
+                        
+                        DatePicker("Ende",
+                                   selection: $endTime,
+                                   displayedComponents: .hourAndMinute)
+                    }
+                    .datePickerStyle(.compact)
+                    
+                    /*ColorPicker("Farbe",
+                                selection: $color,
+                                supportsOpacity: false)*/
+                } // End Section adding details
                 
-                // In die Datenbank tun
-                modelContext.insert(newItem)
-                print("Neues Event gespeichert")
+                Button{
+                    // create new item
+                    let newEvent = Event(title: title, startTime: startTime, endTime: endTime)
+                    
+                    // put into database
+                    modelContext.insert(newEvent)
+                    print("Neues Event gespeichert")
+                    
+                    // close the sheet
+                    showSheet = false
+                } label: {
+                    Label("Hinzufügen", systemImage: "plus")
+                }
                 
-                // Schliessen
-                showSheet = false
-            } label: {
-                Label("Hinzufügen", systemImage: "plus")
-            }
-        }
+            } // List
+            .navigationTitle("Neues Event")
+        } detail: {
+            
+        } // NavigationSplitView
+        
     } // View
 }
 
 #Preview {
-    AddEventView(showSheet: .constant(false)) // Damit es in der Preview geht
+  AddEventView(showSheet: .constant(false)) // to make the Preview work
 }
-
-/*
- private func addItem() {
-     withAnimation {
-         
-         let newItem = Event(event: "Fach", startTime: "12:00", endTime: "13:00")
-         print("Neues Objekt erstellt")
-         // 🔴 sollte ein Wähler sein als Sheet…
-         
-         
-         modelContext.insert(newItem)
-         print("In die Datenbank getan")
-     }
- }
- */
