@@ -15,18 +15,19 @@ final class Event {
     var startTime: Date = Date()
     var endTime: Date = Date()
     //🔴var eventColor: Color // Add a color to let the user pick from
+    var eventColor: String // not ideal to use a String for color but SwiftData doesn't support colors
     
     init(
         id: UUID = UUID(), //default value in init
         title: String,
         startTime: Date,
-        endTime: Date = Date()
-        //eventColor: Color
+        endTime: Date = Date(),
+        eventColor: String
     ) {
         self.id = id
         self.title = title
         self.startTime = startTime
         self.startTime = endTime
-        //self.eventColor = eventColor
+        self.eventColor = eventColor
     }
 }

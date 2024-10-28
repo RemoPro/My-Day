@@ -51,7 +51,9 @@ struct ContentView: View {
                     
                     
                 }
-                .onDelete(perform: deleteItems) // Löscchen ermöglichen
+                .onDelete(perform: deleteItems) // enable deletion
+                //.foregroundStyle(.blue) // color of the event
+                // 🔴 should be chosen through the user in the add Event sheet, so  eventColor
                 
             } // List
             .navigationTitle("Tagesplan")
