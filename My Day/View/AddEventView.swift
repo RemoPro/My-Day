@@ -35,6 +35,8 @@ struct AddEventView: View {
                     }
                     .datePickerStyle(.compact)
                     
+                    //Text("Color…")
+                    
                     /*ColorPicker("Farbe",
                                 selection: $color,
                                 supportsOpacity: false)*/
