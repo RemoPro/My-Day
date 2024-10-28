@@ -40,6 +40,12 @@ struct AddEventView: View {
                                 supportsOpacity: false)*/
                 } // End Section adding details
                 
+                Section{
+                    Text("Color")
+                } header: {
+                    Text("Color")
+                }
+                
                 Button{
                     // create new item
                     let newEvent = Event(title: title, startTime: startTime, endTime: endTime)
