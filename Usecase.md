@@ -17,7 +17,7 @@
 
 
 ## Test case
-- 2+ test cases showing the correct function of the app
+- [x] 2+ test cases showing the correct function of the app
 
 ### test 1: save a new event
 - fill in a new event with title, color, start and end time
