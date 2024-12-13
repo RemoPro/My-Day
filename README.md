@@ -5,9 +5,10 @@ This app allows you to see your daily routine in a list.
 Compatible with iOS 17.0+
 
 - Events sorted by time
-- Colors selectable by yourself
+- Colors selectable by the user for each event
 - Calculates the time between an event
 
+I have some experience with Swift and SwiftUI so I learned from the project.
 
 ## Purpose
 - A plan to view the schedule of your own day
@@ -16,6 +17,7 @@ Compatible with iOS 17.0+
 1. List with a schedule
 2. Users could add a title, time and color
 3. Events should be saved persistent in the app
+4. The app is localized in English and German
 
 ## Requirements
 - Using Swift
