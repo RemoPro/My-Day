@@ -20,9 +20,10 @@ I have some experience with Swift and SwiftUI so I learned from the project.
 4. The app is localized in English and German
 
 ## Requirements
-- Using Swift
-3. Use a database (SwiftData)
-- 🔴 (Examples)
+- Using Swift and SwiftUI
+- G1, G2 make the UI with SwiftUI
+- G1, G2, G3 Use a database (SwiftData)
+- G4 Translate all strings
 
 ### Requirements from schoool
 - [x] 2+ user inputs: text (title), time and a color (background)
