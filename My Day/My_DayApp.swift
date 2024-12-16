@@ -5,6 +5,8 @@
 //  Created by Remo Prozzillo on 23.10.2024.
 //
 
+// This file is used when opening the app. It also creates the database model
+
 import SwiftUI
 import SwiftData
 

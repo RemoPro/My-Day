@@ -5,18 +5,18 @@
 //  Created by Remo Prozzillo on 23.10.2024.
 //
 
+// The View that the app displays when opened. It shows either nothing or the events.
+
 import SwiftUI
 import SwiftData
-
 
 struct ContentView: View {
     
     // Database through variable…
     @Environment(\.modelContext) private var modelContext
     
-    // search through the database for the values
-    @Query private var event: [Event]
-    //🔴 @Query(sort: \Event.startTime) // sort after time beginning
+    // search through the database for the values and sort after the beginning time
+        @Query(sort: \Event.startTime) var event: [Event] // sort after time beginning
     
     // showing the "add new" sheet
     @State private var showSheet: Bool = false
@@ -24,13 +24,14 @@ struct ContentView: View {
     @State private var title: String = ""
     @State private var startTime = Date()
     @State private var endTime = Date()
+
     
     var body: some View {
         NavigationSplitView{
             
             // If nothing is saved show it
             if event.isEmpty {
-                ContentUnavailableView("Keine Einträge vorhanden…", systemImage: "circle.slash")
+                ContentUnavailableView("noEvents", systemImage: "circle.slash")
             }
             
             List{
@@ -38,25 +39,49 @@ struct ContentView: View {
                 // repeat with each entry
                 ForEach(event) { event in
                     
-                    VStack(alignment: .leading) {
-                        Text(event.title)
-                            .bold()
-                        HStack{
-                            // Time isn't a string and has to be maked
+                    HStack {
+                        // Left: time, aligment on right because 8:00 is narrower than 10:00
+                        //  8:00
+                        //     8
+                        // 10:00
+                        VStack(alignment: .trailing) {
+                            // Start time
                             Text(event.startTime.formatted(date: .omitted, time: .shortened))
-                            Text("–")
+                            
+                            // Difference
+                            let interval = event.endTime.timeIntervalSince(event.startTime)
+                            Text(interval.formattedTime)
+                                .font(.caption)
+                            
+                            // End time
                             Text(event.endTime.formatted(date: .omitted, time: .shortened))
                         }
-                    }
+                        
+                        VStack(alignment: .leading) {
+                            // Title
+                            Text(event.title)
+                                .font(.system(.title2, weight: .bold))
+                            // Description
+                            //Text(event.nameDescription)
+                        }
+                    } // HStack
                     
+                    // Text Color
+                    .foregroundStyle(Color.init(hex: "\(event.eventFontColor)")) // text color
+                    // Background Color
+                    .listRowBackground(Color.init(hex: "\(event.eventBackgroundColor)"))
                     
-                }
+                } // ForEach
                 .onDelete(perform: deleteItems) // enable deletion
-                //.foregroundStyle(.blue) // color of the event
-                // 🔴 should be chosen through the user in the add Event sheet, so  eventColor
-                
+                /*.swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        event.remove(at: index)
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                }*/
             } // List
-            .navigationTitle("Tagesplan")
+            .navigationTitle("titleAppName")
 #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
 #endif
