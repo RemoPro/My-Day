@@ -10,6 +10,8 @@ Compatible with iOS 17.0+
 
 I have some experience with Swift and SwiftUI so I learned from the project.
 
+Note: The project was created for educational purposes and thus have comments/descriptions
+
 ## Purpose
 - A plan to view the schedule of your own day
 
@@ -37,4 +39,3 @@ I have some experience with Swift and SwiftUI so I learned from the project.
 - [x] use a database and insert, query and calculate with it
 - [ ] if dependencies are used have an eye on the compatibility
 
-Note: The project was created for educational purposes and thus have comments/descriptions
