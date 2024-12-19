@@ -28,11 +28,12 @@ struct AddEventView: View {
     @Binding var showSheet: Bool
     
     // Generating the variables for saving them into the database
-    @State private var title: String = ""
+    ///@State private var title: String = ""
     //@State private var nameDescription: String = ""
     
-    @State private var startTime = Date()
-    @State private var endTime = Date()
+    ///@State private var startTime = Date()
+    ///@State private var endTime = Date()
+    @State private var event = Event()
     
     //@State private var eventColor: Color = .white // opposite of .primary
     @State private var eventBackgroundColor: Color = .gray
@@ -52,23 +53,23 @@ struct AddEventView: View {
                     // 10:00
                     VStack(alignment: .trailing) {
                         // Start time
-                        Text(startTime.formatted(date: .omitted, time: .shortened))
+                        Text(event.startTime.formatted(date: .omitted, time: .shortened))
                         
                         // Difference
-                        let interval = endTime.timeIntervalSince(startTime)
+                        let interval = event.endTime.timeIntervalSince(event.startTime)
                         Text(interval.formattedTime)
                             .font(.caption)
                         
                         // End time
-                        Text(endTime.formatted(date: .omitted, time: .shortened))
+                        Text(event.endTime.formatted(date: .omitted, time: .shortened))
                     }
                     
                     VStack(alignment: .leading) {
                         // Title
-                        if title.isEmpty == false {
-                            Text(title)
+                        if event.title.isEmpty == false {
+                            Text(event.title)
                                 .font(.system(.title2, weight: .bold))
-                        } else if title.isEmpty == true {
+                        } else if event.title.isEmpty == true {
                             Text("exampleTitle")
                                 .font(.system(.title2, weight: .bold))
                         }
@@ -91,23 +92,23 @@ struct AddEventView: View {
             }
             
             Section{
-                TextField("exampleTitle", text: $title)
+                TextField("exampleTitle", text: $event.title)
                 //TextField("Beschreibung", text: $nameDescription)
                 
                 Group{
                     DatePicker("eventStart",
-                               selection: $startTime,
+                               selection: $event.startTime,
                                displayedComponents: .hourAndMinute)
-                    .onChange(of: startTime) { oldValue, newValue in
-                        print("Old start time: \(startTime)")
-                        print("New start time: \(startTime)")
+                    .onChange(of: event.startTime) { oldValue, newValue in
+                        print("Old start time: \(event.startTime)")
+                        print("New start time: \(event.startTime)")
                     }
                     DatePicker("eventEnd",
-                               selection: $endTime,
+                               selection: $event.endTime,
                                displayedComponents: .hourAndMinute)
-                    .onChange(of: endTime) { oldValue, newValue in
-                        print("Old end time: \(endTime)")
-                        print("New end time: \(endTime)")
+                    .onChange(of: event.endTime) { oldValue, newValue in
+                        print("Old end time: \(event.endTime)")
+                        print("New end time: \(event.endTime)")
                     }
                 }
                 .datePickerStyle(.compact)
@@ -121,18 +122,14 @@ struct AddEventView: View {
                             selection: $eventBackgroundColor,
                             supportsOpacity: false)
                 .onChange(of: eventBackgroundColor) { oldValue, newValue in
-                    print("Old background color: \(oldValue.toHex())")
-                    print("New background color: \(newValue.toHex())")
-                    // color, toHex Function
+                    event.eventBackgroundColor = newValue.toHex()
                 }
                 
                 ColorPicker("eventTextColor",
                             selection: $eventFontColor,
                             supportsOpacity: false)
-                .onChange(of: eventFontColor) { oldValue, newValue in
-                    print("Old text color: \(oldValue.toHex())")
-                    print("New text color: \(newValue.toHex())")
-                    // color, toHex Function
+                .onChange(of: eventFontColor) { _, newValue in
+                    event.eventFontColor = newValue.toHex()
                 }
             } header: {
                 Text("colorHeader")
@@ -150,19 +147,19 @@ struct AddEventView: View {
             
             Button{
                 // create new item, key in the database and variable
-                let newEvent = Event(
-                    title: title,
-                    //nameDescription: nameDescription,
-                    startTime: startTime,
-                    endTime: endTime,
-                    eventBackgroundColor: eventBackgroundColor.toHex(),
-                    eventFontColor: eventFontColor.toHex()
-                )
+//                let newEvent = Event(
+//                    title: event.title,
+//                    //nameDescription: nameDescription,
+//                    startTime: event.startTime,
+//                    endTime: event.endTime,
+//                    eventBackgroundColor: eventBackgroundColor.toHex(),
+//                    eventFontColor: eventFontColor.toHex()
+//                )
                 // for the database it must be a string
                 //  - so converting the color to string
                 
                 // put into database
-                modelContext.insert(newEvent)
+                modelContext.insert(event)
                 print("Neues Event gespeichert")
                 
                 // close the sheet
@@ -170,14 +167,14 @@ struct AddEventView: View {
             } label: {
                 
                 // if the user didn't wrote an title yet tint the button grey
-                if title.isEmpty {
+                if event.title.isEmpty {
                     Label("buttonAddEvent", systemImage: "plus")
                     .foregroundStyle(.secondary)
-                } else if title.isEmpty == false { // title provided
+                } else if event.title.isEmpty == false { // title provided
                     Label("buttonAddEvent", systemImage: "plus")
                 }
             }
-            .disabled(title.isEmpty)
+            .disabled(event.title.isEmpty)
             
             //.navigationTitle("Neues Event")
         } // List

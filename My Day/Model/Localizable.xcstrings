@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add" : {
+
+    },
     "buttonAddEvent" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -30,21 +30,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6EAAF49A2CFE4BED00E0C2DF /* Exceptions for "My Day" folder in "My Day" target */ = {
+		A66A5BAE2D1082F10019DD6D /* Exceptions for "My DayUITests" folder in "My DayUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"My-Day-Info.plist",
+				README.md,
 			);
-			target = 6E51B7462CC9A70100C083BC /* My Day */;
+			target = 6E51B7632CC9A70300C083BC /* My DayUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6E51B7492CC9A70100C083BC /* My Day */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6EAAF49A2CFE4BED00E0C2DF /* Exceptions for "My Day" folder in "My Day" target */,
-			);
 			path = "My Day";
 			sourceTree = "<group>";
 		};
@@ -55,6 +52,9 @@
 		};
 		6E51B7672CC9A70300C083BC /* My DayUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A66A5BAE2D1082F10019DD6D /* Exceptions for "My DayUITests" folder in "My DayUITests" target */,
+			);
 			path = "My DayUITests";
 			sourceTree = "<group>";
 		};
@@ -209,6 +209,9 @@
 			);
 			mainGroup = 6E51B73E2CC9A70100C083BC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A66A5BAF2D1084690019DD6D /* XCRemoteSwiftPackageReference "SwiftCSV" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6E51B7482CC9A70100C083BC /* Products */;
 			projectDirPath = "";
@@ -625,6 +628,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A66A5BAF2D1084690019DD6D /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftcsv/SwiftCSV";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 6E51B73F2CC9A70100C083BC /* Project object */;
 }

@@ -93,12 +93,10 @@ struct ContentView: View {
 #endif
                 // Knopf oben
                 ToolbarItem {
-                    Button{
+                    Button("Add", systemImage: "plus") {
                         showSheet = true
-                        
-                    } label: {
-                        Image(systemName: "plus")
                     }
+                    .labelStyle(.iconOnly)
                     .sheet(isPresented: $showSheet) {
                         // Andere View öffnen
                         AddEventView(showSheet: $showSheet)

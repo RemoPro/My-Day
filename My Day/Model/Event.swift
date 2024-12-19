@@ -9,6 +9,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Event {
@@ -21,15 +22,24 @@ final class Event {
     var eventBackgroundColor: String // not ideal to use a String for color but SwiftData doesn't support colors
     var eventFontColor: String
     
+    var eventBackgroundColorColor: Color {
+        get {
+            Color(hex: eventBackgroundColor)
+        }
+//        set { newValue in
+//            
+//        }
+    }
+    
     init(
         id: UUID = UUID(),
-        title: String,
+        title: String = "",
         //nameDescription: String,
-        startTime: Date,
-        endTime: Date = Date(),
+        startTime: Date = Date.now,
+        endTime: Date = Date.now,
         
-        eventBackgroundColor: String,
-        eventFontColor: String
+        eventBackgroundColor: String = Color.secondary.toHex(),
+        eventFontColor: String = Color.primary.toHex()
     ) {
         self.id = id
         self.title = title
