@@ -67,9 +67,9 @@ struct ContentView: View {
                     } // HStack
                     
                     // Text Color
-                    .foregroundStyle(Color.init(hex: "\(event.eventFontColor)")) // text color
+                    .foregroundStyle(Color.init(hex: "\(event.eventFontColorString)")) // text color
                     // Background Color
-                    .listRowBackground(Color.init(hex: "\(event.eventBackgroundColor)"))
+                    .listRowBackground(Color.init(hex: "\(event.eventBackgroundColorString)"))
                     
                 } // ForEach
                 .onDelete(perform: deleteItems) // enable deletion
