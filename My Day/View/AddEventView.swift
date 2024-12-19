@@ -117,19 +117,20 @@ struct AddEventView: View {
             
             // Colors
             Section{
-                // The ColorPicker generates a color that I need to convert to a string
-                ColorPicker("eventColor",
-                            selection: $eventBackgroundColor,
-                            supportsOpacity: false)
-                .onChange(of: eventBackgroundColor) { oldValue, newValue in
-                    event.eventBackgroundColor = newValue.toHex()
-                }
+                // ~~The ColorPicker generates a color that I need to convert to a string~~
+              //Conversion now takes place in the `Event` model itself
+              ColorPicker(
+                "eventColor",
+                selection: $event.eventBackgroundColor,
+                supportsOpacity: false
+              )
                 
                 ColorPicker("eventTextColor",
                             selection: $eventFontColor,
                             supportsOpacity: false)
                 .onChange(of: eventFontColor) { _, newValue in
-                    event.eventFontColor = newValue.toHex()
+                  //TODO: ASSIGNMENT: make this `.onChange` obsolete by adding another computed property for eventFontColorString and using it in the picker's selection directly
+                    event.eventFontColorString = newValue.toHex()
                 }
             } header: {
                 Text("colorHeader")

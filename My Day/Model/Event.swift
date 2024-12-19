@@ -19,18 +19,21 @@ final class Event {
     var startTime: Date = Date()
     var endTime: Date = Date()
     
-    var eventBackgroundColor: String // not ideal to use a String for color but SwiftData doesn't support colors
-    var eventFontColor: String
-    
-    var eventBackgroundColorColor: Color {
+    var eventBackgroundColorString: String // not ideal to use a String for color but SwiftData doesn't support colors
+    var eventFontColorString: String
+
+    /// Computed property with a setter to enable us to use this color as a Binding in SwiftUI.
+    var eventBackgroundColor: Color {
         get {
-            Color(hex: eventBackgroundColor)
+            Color(hex: eventBackgroundColorString)
         }
-//        set { newValue in
-//            
-//        }
+        set {
+          eventBackgroundColorString = newValue.toHex()
+        }
     }
-    
+
+  //TODO: ASSIGNMENT: add another computed property to be able to use eventFontColor directly in SwiftUI
+
     init(
         id: UUID = UUID(),
         title: String = "",
@@ -47,7 +50,7 @@ final class Event {
         self.startTime = startTime
         self.startTime = endTime
         
-        self.eventBackgroundColor = eventBackgroundColor
-        self.eventFontColor = eventFontColor
+        self.eventBackgroundColorString = eventBackgroundColor
+        self.eventFontColorString = eventFontColor
     }
 }
