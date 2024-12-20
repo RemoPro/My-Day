@@ -30,7 +30,7 @@ Note: The project was created for educational purposes and thus have comments/de
 ### Requirements from schoool
 - [x] 2+ user inputs: text (title), time and a color (background)
 - [ ] input from a file
-- [x] input is displayed (in a list)
+- [x] output is displayed (in a list)
 - [x] 3+ variable types used: String, Date and color
 - [x] many comments that describe the code
 - [x] 2+ if used (when no input yet show a placeholder)
