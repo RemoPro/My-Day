@@ -34,7 +34,7 @@ Note: The project was created for educational purposes and thus have comments/de
 - [x] 3+ variable types used: String, Date and color
 - [x] many comments that describe the code
 - [x] 2+ if used (when no input yet show a placeholder)
-- [ ] while/for
+- [x] while/for (ForEach)
 - [ ] RegEx used (don't find a useful usecase in the app)
 - [x] use a database and insert, query and calculate with it
 - [ ] if dependencies are used have an eye on the compatibility
