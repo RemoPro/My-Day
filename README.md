@@ -2,6 +2,8 @@
 
 This app allows you to see your daily routine in a list.
 
+![icon of the app, a teal/blue gradient with three white lines on front of it meant as show a list](/App%20icon%20My%20Day%20small.png)
+
 Compatible with iOS 17.0+
 
 - Events sorted by time
@@ -10,7 +12,7 @@ Compatible with iOS 17.0+
 
 I have some experience with Swift and SwiftUI so I learned from the project.
 
-Note: The project was created for educational purposes and thus have comments/descriptions
+Note: The project was created for educational purposes and thus have (more) comments/descriptions
 
 ## Purpose
 - A plan to view the schedule of your own day
